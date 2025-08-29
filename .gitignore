@@ -1,0 +1,7 @@
+backend/venv/
+frontend/node_modules/
+*.env
+backend/data/*.faiss
+backend/data/*index*.json
+**/__pycache__/
+*.log
