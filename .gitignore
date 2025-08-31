@@ -1,0 +1,27 @@
+# Environnements virtuels Python
+backend/venv/
+.venv/
+env/
+ENV/
+
+# Dépendances Node.js
+frontend/node_modules/
+
+# Fichiers d'environnement
+*.env
+
+# Données et index
+backend/data/*.faiss
+backend/data/*index*.json
+
+# Caches Python
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+*.log
+
+# Autres fichiers temporaires
+.DS_Store
+Thumbs.db
