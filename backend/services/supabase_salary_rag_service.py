@@ -13,7 +13,11 @@ import requests
 load_dotenv()
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
+<<<<<<< HEAD
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+=======
+SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY")
+>>>>>>> 5e0de77 (Auth commit)
 if not SUPABASE_URL or not SUPABASE_KEY:
     raise ValueError("❌ SUPABASE_URL / SUPABASE_KEY manquants dans .env")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)

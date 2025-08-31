@@ -1,5 +1,6 @@
 'use client'
 
+<<<<<<< HEAD
 import Link from 'next/link'
 import {
   BarChart3,
@@ -76,10 +77,48 @@ export default function DashboardPage() {
       title: 'Plan de carrière généré',
       date: '2024-01-08',
       status: 'completed'
+=======
+import { useAuth } from '../../lib/useAuth'
+import AuthGuard from '../../components/Auth/AuthGuard'
+import { BarChart3, FileText, DollarSign, Users, TrendingUp, Activity } from 'lucide-react'
+
+export default function DashboardPage() {
+  const { user } = useAuth()
+
+  const stats = [
+    {
+      name: 'Analyses de documents',
+      value: (user as any)?.document_analyses_count || 0,
+      icon: FileText,
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-100 dark:bg-blue-900/30'
+    },
+    {
+      name: 'Analyses salariales',
+      value: (user as any)?.salary_analyses_count || 0,
+      icon: DollarSign,
+      color: 'text-green-600',
+      bgColor: 'bg-green-100 dark:bg-green-900/30'
+    },
+    {
+      name: 'Sessions de coaching',
+      value: (user as any)?.coaching_sessions_count || 0,
+      icon: Users,
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-100 dark:bg-purple-900/30'
+    },
+    {
+      name: 'Total des analyses',
+      value: (user as any)?.total_analyses || 0,
+      icon: TrendingUp,
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-100 dark:bg-orange-900/30'
+>>>>>>> 5e0de77 (Auth commit)
     }
   ]
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* En-tête */}
@@ -260,10 +299,163 @@ export default function DashboardPage() {
               >
                 Voir tout l'historique
               </Link>
+=======
+    <AuthGuard>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* En-tête */}
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 dark:from-white dark:via-purple-300 dark:to-white bg-clip-text text-transparent mb-2">
+              Tableau de bord
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300">
+              Bienvenue, {(user as any)?.first_name} {(user as any)?.last_name} ! Voici un aperçu de votre activité.
+            </p>
+          </div>
+
+          {/* Statistiques */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {stats.map((stat) => {
+              const Icon = stat.icon
+              return (
+                <div
+                  key={stat.name}
+                  className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 dark:border-gray-700/20 hover:shadow-2xl transition-all duration-300"
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                        {stat.name}
+                      </p>
+                      <p className="text-3xl font-bold text-gray-900 dark:text-white">
+                        {stat.value}
+                      </p>
+                    </div>
+                    <div className={`p-3 rounded-xl ${stat.bgColor}`}>
+                      <Icon className={`h-6 w-6 ${stat.color}`} />
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Actions rapides */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 dark:border-gray-700/20 hover:shadow-2xl transition-all duration-300">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                  <FileText className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Analyser un document
+                </h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Uploadez et analysez vos bulletins de paie, contrats ou autres documents.
+              </p>
+              <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-4 py-2 rounded-xl hover:shadow-lg transition-all duration-300">
+                Commencer
+              </button>
+            </div>
+
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 dark:border-gray-700/20 hover:shadow-2xl transition-all duration-300">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                  <DollarSign className="h-6 w-6 text-green-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Analyse salariale
+                </h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Comparez votre salaire avec le marché et obtenez des recommandations.
+              </p>
+              <button className="w-full bg-gradient-to-r from-green-500 to-emerald-400 text-white px-4 py-2 rounded-xl hover:shadow-lg transition-all duration-300">
+                Analyser
+              </button>
+            </div>
+
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 dark:border-gray-700/20 hover:shadow-2xl transition-all duration-300">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                  <Users className="h-6 w-6 text-purple-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Coaching carrière
+                </h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Recevez des conseils personnalisés pour votre évolution professionnelle.
+              </p>
+              <button className="w-full bg-gradient-to-r from-purple-500 to-pink-400 text-white px-4 py-2 rounded-xl hover:shadow-lg transition-all duration-300">
+                Commencer
+              </button>
+            </div>
+          </div>
+
+          {/* Activité récente */}
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 dark:border-gray-700/20">
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                <Activity className="h-6 w-6 text-orange-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Activité récente
+              </h3>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+                <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                  <FileText className="h-5 w-5 text-blue-600" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    Analyse de document terminée
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    Il y a 2 heures
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+                <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                  <DollarSign className="h-5 w-5 text-green-600" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    Analyse salariale mise à jour
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    Il y a 1 jour
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+                <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                  <Users className="h-5 w-5 text-purple-600" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    Session de coaching planifiée
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    Il y a 3 jours
+                  </p>
+                </div>
+              </div>
+>>>>>>> 5e0de77 (Auth commit)
             </div>
           </div>
         </div>
       </div>
+<<<<<<< HEAD
     </div>
+=======
+    </AuthGuard>
+>>>>>>> 5e0de77 (Auth commit)
   )
 }

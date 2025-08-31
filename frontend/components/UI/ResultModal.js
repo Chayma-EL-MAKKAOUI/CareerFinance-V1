@@ -1,7 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './Card';
+<<<<<<< HEAD
 import Button from './Button';
+=======
+import Button from './button';
+>>>>>>> 5e0de77 (Auth commit)
 import ActionButtons from './ActionButtons';
 
 const ResultModal = ({ 

@@ -15,7 +15,11 @@ load_dotenv()
 
 # ==================== CONFIG ====================
 SUPABASE_URL = os.getenv("SUPABASE_URL")
+<<<<<<< HEAD
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+=======
+SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY")
+>>>>>>> 5e0de77 (Auth commit)
 
 if not SUPABASE_URL or not SUPABASE_KEY:
     raise ValueError("❌ SUPABASE_URL et SUPABASE_KEY doivent être définis dans .env")

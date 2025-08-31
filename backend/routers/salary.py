@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 from fastapi import APIRouter, HTTPException
+=======
+from fastapi import APIRouter, HTTPException, Depends
+>>>>>>> 5e0de77 (Auth commit)
 from pydantic import BaseModel
 from typing import List, Optional
 import json
 from services.gemini import call_gemini_api
 from services.enhanced_salary_service import enhanced_salary_service
 from services.rag_service import linkedin_rag
+<<<<<<< HEAD
+=======
+from dependencies.auth_dependencies import get_current_user
+>>>>>>> 5e0de77 (Auth commit)
 
 router = APIRouter()
 
@@ -49,7 +57,14 @@ class SalaryResponse(BaseModel):
     dataQuality: Optional[dict] = None
 
 @router.post("/analyze", response_model=SalaryResponse)
+<<<<<<< HEAD
 async def analyze_salary(data: SalaryRequest):
+=======
+async def analyze_salary(
+    data: SalaryRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     # 🧠 Prompt à envoyer à Gemini
     prompt = f"""
 Tu es un expert RH. Voici les infos d’un salarié :

@@ -1,9 +1,28 @@
 # routers/documents.py
+<<<<<<< HEAD
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from services.ocr_service import extract_text_from_pdf, extract_text_from_image
 from services.supabase_doc_rag_service import supabase_doc_rag
 from services.gemini_doc import analyze_with_gemini_with_context
 from typing import Any, Dict, List, Optional
+=======
+from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
+from services.ocr_service import extract_text_from_pdf, extract_text_from_image
+from services.gemini_doc import analyze_with_gemini_with_context
+from dependencies.auth_dependencies import get_current_user
+from typing import Any, Dict, List, Optional
+import os
+
+# Import conditionnel de Supabase (seulement si configuré)
+supabase_doc_rag = None
+try:
+    from services.supabase_doc_rag_service import supabase_doc_rag
+except ValueError as e:
+    if "SUPABASE_URL" in str(e) or "SUPABASE_KEY" in str(e):
+        print("⚠️ Supabase non configuré - fonctionnalités RAG désactivées")
+    else:
+        raise e
+>>>>>>> 5e0de77 (Auth commit)
 
 router = APIRouter()
 
@@ -118,7 +137,14 @@ def build_global_analysis(analysis: Dict[str, Any]) -> Dict[str, Any]:
 # ───────────────────────── Endpoint ─────────────────────────
 
 @router.post("/upload")
+<<<<<<< HEAD
 async def upload_document(file: UploadFile = File(...)):
+=======
+async def upload_document(
+    file: UploadFile = File(...),
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     file_bytes = await file.read()
     try:
         # 1) OCR selon le type MIME
@@ -137,7 +163,11 @@ async def upload_document(file: UploadFile = File(...)):
             doc_id = supabase_doc_rag.store_user_document(
                 title=file.filename or "Document utilisateur",
                 text=text,
+<<<<<<< HEAD
                 user_id=1,  # TODO: remplacer par l'ID utilisateur réel
+=======
+                user_id=current_user.get("id", 1),  # Utiliser l'ID utilisateur réel
+>>>>>>> 5e0de77 (Auth commit)
                 mime_type=file.content_type,
                 source="user_upload"
             )

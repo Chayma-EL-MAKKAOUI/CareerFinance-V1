@@ -1,9 +1,17 @@
 #routers.rag_coaching.py
+<<<<<<< HEAD
 from fastapi import APIRouter, HTTPException, BackgroundTasks
+=======
+from fastapi import APIRouter, HTTPException, BackgroundTasks, Depends
+>>>>>>> 5e0de77 (Auth commit)
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 from services.enhanced_career_service import enhanced_career_service
 from services.rag_service import linkedin_rag
+<<<<<<< HEAD
+=======
+from dependencies.auth_dependencies import get_current_user
+>>>>>>> 5e0de77 (Auth commit)
 import json
 
 router = APIRouter()
@@ -54,7 +62,11 @@ class RAGStatusResponse(BaseModel):
     message: str
 
 @router.get("/status", response_model=RAGStatusResponse)
+<<<<<<< HEAD
 async def get_rag_status():
+=======
+async def get_rag_status(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     """Vérifie le statut du système RAG"""
     try:
         # Vérifier si les données sont chargées
@@ -121,7 +133,14 @@ async def get_rag_status():
         )
 
 @router.post("/initialize")
+<<<<<<< HEAD
 async def initialize_rag(background_tasks: BackgroundTasks):
+=======
+async def initialize_rag(
+    background_tasks: BackgroundTasks,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     """Initialise le système RAG (charge les données et crée l'index)"""
     try:
         # Charger les données LinkedIn
@@ -162,7 +181,14 @@ async def initialize_rag(background_tasks: BackgroundTasks):
         )
 
 @router.post("/enhanced-coaching")
+<<<<<<< HEAD
 async def generate_enhanced_career_plan(data: EnhancedCoachingRequest):
+=======
+async def generate_enhanced_career_plan(
+    data: EnhancedCoachingRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     """Génère un plan de carrière enrichi avec les données LinkedIn"""
     try:
         # Vérifier que le RAG est initialisé
@@ -210,7 +236,14 @@ async def generate_enhanced_career_plan(data: EnhancedCoachingRequest):
         )
 
 @router.post("/search-profiles")
+<<<<<<< HEAD
 async def search_similar_profiles(data: ProfileSearchRequest):
+=======
+async def search_similar_profiles(
+    data: ProfileSearchRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     """Recherche des profils LinkedIn similaires"""
     try:
         if not linkedin_rag.profiles or not linkedin_rag.index:
@@ -238,7 +271,14 @@ async def search_similar_profiles(data: ProfileSearchRequest):
         )
 
 @router.post("/analyze-skills")
+<<<<<<< HEAD
 async def analyze_skills_gap(data: SkillAnalysisRequest):
+=======
+async def analyze_skills_gap(
+    data: SkillAnalysisRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     """Analyse les compétences par rapport au marché LinkedIn"""
     try:
         if not linkedin_rag.profiles or not linkedin_rag.index:
@@ -262,7 +302,15 @@ async def analyze_skills_gap(data: SkillAnalysisRequest):
         )
 
 @router.get("/insights/{sector}")
+<<<<<<< HEAD
 async def get_sector_insights(sector: str, limit: int = 10):
+=======
+async def get_sector_insights(
+    sector: str,
+    limit: int = 10,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     """Obtient des insights sur un secteur spécifique"""
     try:
         if not linkedin_rag.profiles or not linkedin_rag.index:

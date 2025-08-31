@@ -30,6 +30,7 @@ export default function LoginPage() {
     setIsLoading(true)
     setError('')
 
+<<<<<<< HEAD
     // Simulation d'une connexion (à remplacer par une vraie API)
     try {
       await new Promise(resolve => setTimeout(resolve, 1000))
@@ -44,6 +45,19 @@ export default function LoginPage() {
         router.push('/dashboard')
       } else {
         setError('Email ou mot de passe incorrect')
+=======
+    try {
+      // Utiliser la fonction login du hook useAuth
+      const result = await login(formData.email, formData.password)
+      
+      if (result.success) {
+        // Connexion réussie, rediriger vers la page demandée ou le dashboard
+        const urlParams = new URLSearchParams(window.location.search)
+        const redirectTo = urlParams.get('redirect') || '/dashboard'
+        router.push(redirectTo)
+      } else {
+        setError(result.error || 'Email ou mot de passe incorrect')
+>>>>>>> 5e0de77 (Auth commit)
       }
     } catch (err) {
       setError('Une erreur est survenue. Veuillez réessayer.')

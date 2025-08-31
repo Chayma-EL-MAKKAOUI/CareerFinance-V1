@@ -1,9 +1,15 @@
 'use client'
 
 import React, { useState } from 'react'
+<<<<<<< HEAD
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '../UI/Card'
+import { Badge } from '../UI/badge'
+import { Button } from '../UI/button'
+>>>>>>> 5e0de77 (Auth commit)
 import { Users, Building, MapPin, TrendingUp, Star, Download, Share2, X } from 'lucide-react'
 import ActionButtons from '../UI/ActionButtons'
 
@@ -256,6 +262,13 @@ ${index + 1}. Basé sur: ${rec.profileReference}
                   content={insightsText}
                   filename="insights-linkedin.txt"
                   title="Insights LinkedIn"
+<<<<<<< HEAD
+=======
+                  onDownload={() => {}}
+                  onShare={() => {}}
+                  onEdit={() => {}}
+                  onSave={() => {}}
+>>>>>>> 5e0de77 (Auth commit)
                 />
               </div>
             </div>

@@ -1,14 +1,26 @@
 # routers/doc_rag.py
+<<<<<<< HEAD
 from fastapi import APIRouter, HTTPException, Query
+=======
+from fastapi import APIRouter, HTTPException, Query, Depends
+>>>>>>> 5e0de77 (Auth commit)
 from services.supabase_doc_rag_service import supabase_doc_rag
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import numpy as np
 from typing import List, Optional
+<<<<<<< HEAD
 router = APIRouter()
 
 @router.post("/doc-rag/chunk")
 async def chunk_docs():
+=======
+from dependencies.auth_dependencies import get_current_user
+router = APIRouter()
+
+@router.post("/doc-rag/chunk")
+async def chunk_docs(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         out = supabase_doc_rag.chunk_and_store_documents()
         return out
@@ -16,7 +28,11 @@ async def chunk_docs():
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/doc-rag/embed")
+<<<<<<< HEAD
 async def embed_docs():
+=======
+async def embed_docs(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         out = supabase_doc_rag.embed_new_chunks()
         return out
@@ -24,14 +40,22 @@ async def embed_docs():
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/doc-rag/build")
+<<<<<<< HEAD
 async def build_index():
+=======
+async def build_index(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     ok = supabase_doc_rag.build_or_load_faiss()
     if not ok:
         raise HTTPException(status_code=400, detail="Pas d'embeddings en base. Lance d'abord /doc-rag/embed.")
     return {"index": "ready"}
 
 @router.get("/doc-rag/status")
+<<<<<<< HEAD
 async def status():
+=======
+async def status(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     return {
         "index_ready": supabase_doc_rag.index is not None,
     }
@@ -51,7 +75,12 @@ class SearchResult(BaseModel):
 async def query_rag(
     text: str = Query(..., min_length=2, description="Texte ou question à chercher"),
     k: int = Query(5, ge=1, le=20),
+<<<<<<< HEAD
  ):
+=======
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         hits = supabase_doc_rag.search(text, top_k=k)  # le service renvoie déjà des dicts
         return [
@@ -72,7 +101,14 @@ async def query_rag(
 
 # Nouveaux endpoints pour la migration et gestion Supabase
 @router.post("/doc-rag/chunk-specific")
+<<<<<<< HEAD
 async def chunk_specific_doc(doc_id: str):
+=======
+async def chunk_specific_doc(
+    doc_id: str,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     """Chunke un document spécifique par son ID"""
     try:
         out = supabase_doc_rag.chunk_and_store_documents(doc_id=doc_id)
@@ -81,7 +117,11 @@ async def chunk_specific_doc(doc_id: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/doc-rag/documents-count")
+<<<<<<< HEAD
 async def get_documents_count():
+=======
+async def get_documents_count(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     """Retourne le nombre de documents dans Supabase"""
     try:
         from services.supabase_doc_rag_service import supabase
@@ -105,7 +145,14 @@ class AnalyzeResponse(BaseModel):
     confidence: float
 
 @router.post("/analyze", response_model=AnalyzeResponse)
+<<<<<<< HEAD
 async def analyze_text(request: AnalyzeRequest):
+=======
+async def analyze_text(
+    request: AnalyzeRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     """Analyse un texte en utilisant le RAG Supabase"""
     try:
         # Recherche de documents pertinents

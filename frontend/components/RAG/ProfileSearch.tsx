@@ -1,11 +1,19 @@
 'use client'
 
 import React, { useState } from 'react'
+<<<<<<< HEAD
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '../UI/Card'
+import { Button } from '../UI/button'
+import { Input } from '../UI/input'
+import { Badge } from '../UI/badge'
+import { Alert, AlertDescription } from '../UI/alert'
+>>>>>>> 5e0de77 (Auth commit)
 import { 
   Search, 
   User, 
@@ -16,7 +24,11 @@ import {
   Users,
   AlertTriangle 
 } from 'lucide-react'
+<<<<<<< HEAD
 import { ragService } from '@/lib/api'
+=======
+// import { ragService } from '@/lib/api'
+>>>>>>> 5e0de77 (Auth commit)
 
 interface Profile {
   name: string
@@ -66,7 +78,12 @@ export default function ProfileSearch({ ragStatus }: ProfileSearchProps) {
     setHasSearched(true)
 
     try {
+<<<<<<< HEAD
       const response = await ragService.searchProfiles(query.trim(), 10)
+=======
+      // const response = await ragService.searchProfiles(query.trim(), 10)
+      const response = { profiles: [], total: 0 }
+>>>>>>> 5e0de77 (Auth commit)
       setResults(response.profiles || [])
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Erreur lors de la recherche')

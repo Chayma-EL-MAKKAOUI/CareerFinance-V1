@@ -1,10 +1,17 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+<<<<<<< HEAD
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '../UI/Card'
+import { Button } from '../UI/button'
+import { Alert, AlertDescription } from '../UI/alert'
+import { Badge } from '../UI/badge'
+>>>>>>> 5e0de77 (Auth commit)
 import { 
   CheckCircle, 
   XCircle, 
@@ -14,7 +21,11 @@ import {
   AlertTriangle,
   RefreshCw
 } from 'lucide-react'
+<<<<<<< HEAD
 import { ragService } from '@/lib/api'
+=======
+// import { ragService } from '@/lib/api'
+>>>>>>> 5e0de77 (Auth commit)
 
 interface RAGStatusData {
   isInitialized: boolean
@@ -33,7 +44,12 @@ export default function RAGStatus() {
     try {
       setLoading(true)
       setError(null)
+<<<<<<< HEAD
       const data = await ragService.getStatus()
+=======
+      // const data = await ragService.getStatus()
+    const data = { isInitialized: false, profilesCount: 0, indexExists: false, message: 'Système non initialisé' }
+>>>>>>> 5e0de77 (Auth commit)
       setStatus(data)
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Erreur lors de la vérification du statut')
@@ -46,7 +62,11 @@ export default function RAGStatus() {
     try {
       setInitializing(true)
       setError(null)
+<<<<<<< HEAD
       await ragService.initialize()
+=======
+              // await ragService.initialize()
+>>>>>>> 5e0de77 (Auth commit)
       
       // Attendre un peu puis vérifier le statut
       setTimeout(() => {

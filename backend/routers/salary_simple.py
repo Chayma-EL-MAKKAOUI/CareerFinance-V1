@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 from fastapi import APIRouter, HTTPException
+=======
+from fastapi import APIRouter, HTTPException, Depends
+>>>>>>> 5e0de77 (Auth commit)
 from pydantic import BaseModel
 from typing import List, Optional
 import json
 from services.gemini import call_gemini_api
+<<<<<<< HEAD
+=======
+from dependencies.auth_dependencies import get_current_user
+>>>>>>> 5e0de77 (Auth commit)
 
 router = APIRouter()
 
@@ -41,7 +49,14 @@ class SalaryResponse(BaseModel):
     etapes: List[Step]
 
 @router.post("/analyze", response_model=SalaryResponse)
+<<<<<<< HEAD
 async def analyze_salary(data: SalaryRequest):
+=======
+async def analyze_salary(
+    data: SalaryRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     prompt = f"""
 Tu es un expert RH. Voici les infos d'un salarié :
 - Poste : {data.jobTitle}

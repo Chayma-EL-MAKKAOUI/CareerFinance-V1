@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+<<<<<<< HEAD
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -9,6 +10,16 @@ import { Textarea } from '@/components/ui/textarea'
 import { Switch } from '@/components/ui/switch'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
+=======
+import { Card, CardContent, CardHeader, CardTitle } from '../UI/Card'
+import { Button } from '../UI/button'
+import { Input } from '../UI/input'
+import { Label } from '../UI/label'
+import { Textarea } from '../UI/textarea'
+import { Switch } from '../UI/switch'
+import { Alert, AlertDescription } from '../UI/alert'
+import { Badge } from '../UI/badge'
+>>>>>>> 5e0de77 (Auth commit)
 import { 
   Loader2, 
   Target, 
@@ -18,7 +29,11 @@ import {
   Sparkles,
   AlertTriangle 
 } from 'lucide-react'
+<<<<<<< HEAD
 import { ragService } from '@/lib/api'
+=======
+// import { ragService } from '@/lib/api'
+>>>>>>> 5e0de77 (Auth commit)
 
 interface EnhancedCoachingFormProps {
   onResult: (data: any) => void
@@ -69,10 +84,26 @@ export default function EnhancedCoachingForm({ onResult, ragStatus }: EnhancedCo
     setError(null)
 
     try {
+<<<<<<< HEAD
       const result = await ragService.enhancedCoaching(formData)
       onResult(result)
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Erreur lors de la génération du plan de carrière')
+=======
+      // const result = await ragService.enhancedCoaching(formData)
+      // onResult(result)
+      // Simulation temporaire
+      const mockResult = {
+        success: true,
+        data: {
+          plan: "Plan de carrière généré avec succès",
+          recommendations: ["Recommandation 1", "Recommandation 2"]
+        }
+      }
+      onResult(mockResult)
+    } catch (err: any) {
+      setError('Erreur lors de la génération du plan de carrière')
+>>>>>>> 5e0de77 (Auth commit)
     } finally {
       setLoading(false)
     }

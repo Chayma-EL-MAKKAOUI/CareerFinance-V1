@@ -1,7 +1,14 @@
 # routers/salary_enhanced.py
+<<<<<<< HEAD
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, validator
 from typing import List, Optional, Any, Dict
+=======
+from fastapi import APIRouter, HTTPException, Depends
+from pydantic import BaseModel, validator
+from typing import List, Optional, Any, Dict
+from dependencies.auth_dependencies import get_current_user
+>>>>>>> 5e0de77 (Auth commit)
 
 from services.supabase_salary_rag_service import supabase_salary_rag
 
@@ -97,7 +104,14 @@ async def salary_enhanced_documentation():
     }
 
 @router.post("/analyze", response_model=SalaryResponse)
+<<<<<<< HEAD
 async def analyze_salary(data: SalaryRequest):
+=======
+async def analyze_salary(
+    data: SalaryRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     """
     Analyse salariale intelligente avec RAG multi-marchés
     
@@ -165,7 +179,11 @@ async def analyze_salary(data: SalaryRequest):
         raise HTTPException(status_code=500, detail=f"Erreur analyse salariale: {str(e)}")
 
 @router.post("/dataset/backfill")
+<<<<<<< HEAD
 async def dataset_backfill():
+=======
+async def dataset_backfill(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     """
     Crée les chunks et embeddings depuis salary_dataset
     Traite uniquement les entrées avec status='valide'
@@ -193,7 +211,11 @@ async def dataset_backfill():
         raise HTTPException(status_code=500, detail=f"Erreur backfill: {str(e)}")
 
 @router.post("/dataset/reload")
+<<<<<<< HEAD
 async def dataset_reload():
+=======
+async def dataset_reload(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     """
     Recharge l'index FAISS avec les dernières données
     """
@@ -216,7 +238,11 @@ async def dataset_reload():
         raise HTTPException(status_code=500, detail=f"Erreur reload: {str(e)}")
 
 @router.get("/dataset/status")
+<<<<<<< HEAD
 async def dataset_status():
+=======
+async def dataset_status(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     """
     Retourne le statut détaillé du système RAG
     """
@@ -247,7 +273,11 @@ async def dataset_status():
         return {"error": str(e), "system_ready": False}
 
 @router.post("/dataset/validate")
+<<<<<<< HEAD
 async def validate_dataset():
+=======
+async def validate_dataset(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     """
     Revalide les statuts des entrées existantes dans salary_dataset
     Utile après changement des règles de validation
@@ -264,7 +294,11 @@ async def validate_dataset():
         raise HTTPException(status_code=500, detail=f"Erreur validation: {str(e)}")
 
 @router.get("/markets")
+<<<<<<< HEAD
 async def get_supported_markets():
+=======
+async def get_supported_markets(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     """
     Retourne la liste des marchés et pays supportés
     """
@@ -285,7 +319,14 @@ async def get_supported_markets():
     }
 
 @router.post("/debug/search")
+<<<<<<< HEAD
 async def debug_search_process(data: SalaryRequest):
+=======
+async def debug_search_process(
+    data: SalaryRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     """
     Endpoint de debug pour tracer le processus de recherche
     Utile pour comprendre pourquoi les résultats sont identiques

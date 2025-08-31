@@ -1,8 +1,14 @@
 // app/page.tsx
 'use client'
 
+<<<<<<< HEAD
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+=======
+import { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import AuthGuard from '../components/Auth/AuthGuard'
+>>>>>>> 5e0de77 (Auth commit)
 
 // Bulletin
 import BulletinAnalysisResult from '../components/Results/BulletinAnalysisResult'
@@ -15,6 +21,29 @@ import SalaryAnalysisResult, { type SalaryData } from '../components/Results/Sal
 import CareerCoachingResult from '../components/Results/CareerCoachingResult'
 
 export default function Home() {
+<<<<<<< HEAD
+=======
+  const router = useRouter()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Vérification d'authentification directe
+  useEffect(() => {
+    console.log('🔒 Page principale - Vérification d\'authentification...')
+    const token = localStorage.getItem('auth_token')
+    console.log('🔒 Page principale - Token trouvé:', token ? 'Oui' : 'Non')
+    
+    if (!token) {
+      console.log('🔒 Page principale - Pas de token, redirection vers /auth/login')
+      router.push('/auth/login')
+    } else {
+      console.log('🔒 Page principale - Token trouvé, authentification réussie')
+      setIsAuthenticated(true)
+    }
+    setIsLoading(false)
+  }, [router])
+
+>>>>>>> 5e0de77 (Auth commit)
   const [careerUploading, setCareerUploading] = useState(false)
   const [careerStatusMessage, setCareerStatusMessage] = useState('')
   const [careerData, setCareerData] = useState<any>(null)
@@ -25,7 +54,10 @@ export default function Home() {
 
   const [resultData, setResultData] = useState<SalaryData | null>(null)
   const [activeTab, setActiveTab] = useState<'bulletin-paie' | 'analyse-salariale' | 'coaching-carriere'>('bulletin-paie')
+<<<<<<< HEAD
   const router = useRouter()
+=======
+>>>>>>> 5e0de77 (Auth commit)
 
   // Modals
   const [showBulletinResult, setShowBulletinResult] = useState(false)
@@ -521,6 +553,7 @@ const handleCareerCoaching = async () => {
     }
   }
 
+<<<<<<< HEAD
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-6 pb-6 px-6 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
@@ -540,10 +573,92 @@ const handleCareerCoaching = async () => {
               <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
               <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse delay-75"></div>
               <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse delay-150"></div>
+=======
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-cyan-400 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <span className="text-white font-bold text-2xl">CF</span>
+          </div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 font-medium">Vérification de l'authentification...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <span className="text-white font-bold text-2xl">🔒</span>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Accès Refusé</h2>
+          <p className="text-gray-600 mb-4">Vous devez être connecté pour accéder à cette page.</p>
+          <button
+            onClick={() => router.push('/auth/login')}
+            className="bg-gradient-to-r from-purple-500 to-cyan-400 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all"
+          >
+            Se connecter
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <AuthGuard>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-6 pb-6 px-6 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-cyan-400 rounded-2xl mb-6 shadow-lg">
+              <span className="text-white font-bold text-2xl">CF</span>
+            </div>
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 dark:from-white dark:via-purple-300 dark:to-white bg-clip-text text-transparent mb-4">
+              CareerFinance AI
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Votre assistant intelligent pour optimiser votre carrière et comprendre vos finances
+            </p>
+            <div className="mt-6 flex flex-col items-center space-y-4">
+              <div className="flex space-x-2">
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse delay-75"></div>
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse delay-150"></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            {/* Tabs */}
+            <div className="flex space-x-2 mb-6 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-2 rounded-xl shadow-lg border border-white/20 dark:border-gray-700/20">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex-1 py-4 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${
+                    activeTab === tab.id
+                      ? 'bg-gradient-to-r from-purple-500 to-cyan-400 text-white shadow-xl shadow-purple-500/25'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-gray-700/50'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Tab Content */}
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-xl border border-white/20 dark:border-gray-700/20">
+              {renderTabContent()}
+>>>>>>> 5e0de77 (Auth commit)
             </div>
           </div>
         </div>
 
+<<<<<<< HEAD
         <div className="max-w-4xl mx-auto">
           {/* Tabs */}
           <div className="flex space-x-2 mb-6 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-2 rounded-xl shadow-lg border border-white/20 dark:border-gray-700/20">
@@ -591,5 +706,30 @@ const handleCareerCoaching = async () => {
         />
       )}
     </div>
+=======
+        {/* Modals */}
+        {showBulletinResult && bulletinData && (
+          <BulletinAnalysisResult
+            data={bulletinData}
+            onClose={() => setShowBulletinResult(false)}
+          />
+        )}
+
+        {showSalaryResult && resultData && (
+          <SalaryAnalysisResult
+            data={resultData}
+            onClose={() => setShowSalaryResult(false)}
+          />
+        )}
+
+        {showCareerResult && careerData && (
+          <CareerCoachingResult
+            data={careerData}
+            onClose={() => setShowCareerResult(false)}
+          />
+        )}
+      </div>
+    </AuthGuard>
+>>>>>>> 5e0de77 (Auth commit)
   )
 }

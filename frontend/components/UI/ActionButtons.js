@@ -1,6 +1,10 @@
 'use client';
 import React from 'react';
+<<<<<<< HEAD
 import Button from './Button';
+=======
+import Button from './button';
+>>>>>>> 5e0de77 (Auth commit)
 
 const ActionButtons = ({ 
   content, 

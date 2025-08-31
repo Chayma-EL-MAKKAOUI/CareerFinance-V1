@@ -6,6 +6,15 @@ import { usePathname, useRouter } from 'next/navigation'
 import { Menu, X, User, LogOut, BarChart3, History, Home } from 'lucide-react'
 import { useAuth } from '../../lib/useAuth'
 
+<<<<<<< HEAD
+=======
+interface User {
+  id: number
+  email: string
+  name: string
+}
+
+>>>>>>> 5e0de77 (Auth commit)
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
@@ -82,15 +91,24 @@ export default function Navbar() {
                   <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-cyan-400 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
                     <User size={18} className="text-white" />
                   </div>
+<<<<<<< HEAD
                   <span className="hidden md:block text-sm font-medium">{user?.name}</span>
+=======
+                  <span className="hidden md:block text-sm font-medium">{(user as User | null)?.name}</span>
+>>>>>>> 5e0de77 (Auth commit)
                 </button>
 
                 {/* Menu déroulant utilisateur */}
                 {isUserMenuOpen && (
                   <div className="absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl py-2 z-50 border border-white/20">
                     <div className="px-4 py-2 border-b border-gray-100">
+<<<<<<< HEAD
                       <p className="text-sm font-medium text-gray-900">{user?.name}</p>
                       <p className="text-sm text-gray-500">{user?.email}</p>
+=======
+                      <p className="text-sm font-medium text-gray-900">{(user as User | null)?.name}</p>
+                      <p className="text-sm text-gray-500">{(user as User | null)?.email}</p>
+>>>>>>> 5e0de77 (Auth commit)
                     </div>
                     <Link
                       href="/dashboard"

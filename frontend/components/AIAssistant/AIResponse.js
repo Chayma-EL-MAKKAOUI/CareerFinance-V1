@@ -1,7 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../UI/Card';
+<<<<<<< HEAD
 import Button from '../UI/Button';
+=======
+import Button from '../UI/button';
+>>>>>>> 5e0de77 (Auth commit)
 import ActionButtons from '../UI/ActionButtons';
 
 const AIResponse = ({ response, isOpen, onClose, onSave }) => {

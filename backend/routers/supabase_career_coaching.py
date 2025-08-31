@@ -1,9 +1,17 @@
 # routers/supabase_career_coaching.py
+<<<<<<< HEAD
 from fastapi import APIRouter, HTTPException, BackgroundTasks
+=======
+from fastapi import APIRouter, HTTPException, BackgroundTasks, Depends
+>>>>>>> 5e0de77 (Auth commit)
 from pydantic import BaseModel
 from typing import List, Dict, Any
 from services.supabase_career_coaching_service import career_coaching_service
 from services.careerPromt import generate_career_plan_with_rag as llm_generate_career_plan_with_rag
+<<<<<<< HEAD
+=======
+from dependencies.auth_dependencies import get_current_user
+>>>>>>> 5e0de77 (Auth commit)
 import json
 
 def _norm_priorite(val: str) -> str:
@@ -133,7 +141,11 @@ class SystemStatusResponse(BaseModel):
     message: str
 
 @router.get("/status", response_model=SystemStatusResponse)
+<<<<<<< HEAD
 async def get_system_status():
+=======
+async def get_system_status(current_user: dict = Depends(get_current_user)):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         index_exists = career_coaching_service.index is not None
         profiles_count = len(career_coaching_service.profile_map) if career_coaching_service.profile_map else 0
@@ -171,7 +183,14 @@ async def get_system_status():
         )
 
 @router.post("/process-profiles")
+<<<<<<< HEAD
 async def process_linkedin_profiles(background_tasks: BackgroundTasks):
+=======
+async def process_linkedin_profiles(
+    background_tasks: BackgroundTasks,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         def process_profiles():
             try:
@@ -201,7 +220,14 @@ async def process_linkedin_profiles(background_tasks: BackgroundTasks):
         raise HTTPException(status_code=500, detail=f"Erreur lors du démarrage du traitement: {str(e)}")
 
 @router.post("/initialize")
+<<<<<<< HEAD
 async def initialize_system(background_tasks: BackgroundTasks):
+=======
+async def initialize_system(
+    background_tasks: BackgroundTasks,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         profiles = career_coaching_service.load_profiles_from_supabase()
         chunks = career_coaching_service.load_chunks_from_supabase()
@@ -241,7 +267,14 @@ async def initialize_system(background_tasks: BackgroundTasks):
         raise HTTPException(status_code=500, detail=f"Erreur lors de l'initialisation: {str(e)}")
 
 @router.post("/coaching")
+<<<<<<< HEAD
 async def coaching_session_with_rag(data: CareerCoachingRequest):
+=======
+async def coaching_session_with_rag(
+    data: CareerCoachingRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     """Session de coaching utilisant le RAG sur les profils LinkedIn"""
     try:
         print(f"📥 Requête coaching reçue: {data}")
@@ -367,7 +400,14 @@ async def coaching_session_with_rag(data: CareerCoachingRequest):
         )
 
 @router.post("/search-profiles")
+<<<<<<< HEAD
 async def search_similar_profiles(data: ProfileSearchRequest):
+=======
+async def search_similar_profiles(
+    data: ProfileSearchRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         if not career_coaching_service.index or not career_coaching_service.profile_map:
             raise HTTPException(status_code=503, detail="Système non initialisé. Utilisez /process-profiles puis /initialize")
@@ -394,7 +434,15 @@ async def search_similar_profiles(data: ProfileSearchRequest):
         raise HTTPException(status_code=500, detail=f"Erreur lors de la recherche: {str(e)}")
 
 @router.post("/rag-search")
+<<<<<<< HEAD
 async def rag_search_chunks(query: str, top_k: int = 5):
+=======
+async def rag_search_chunks(
+    query: str,
+    top_k: int = 5,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         if not career_coaching_service.index or not career_coaching_service.chunk_map:
             raise HTTPException(status_code=503, detail="Système non initialisé")
@@ -423,7 +471,14 @@ async def rag_search_chunks(query: str, top_k: int = 5):
         raise HTTPException(status_code=500, detail=f"Erreur lors de la recherche RAG: {str(e)}")
 
 @router.post("/analyze-skills")
+<<<<<<< HEAD
 async def analyze_skills_gap(data: SkillAnalysisRequest):
+=======
+async def analyze_skills_gap(
+    data: SkillAnalysisRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         if not career_coaching_service.index or not career_coaching_service.profile_map:
             raise HTTPException(status_code=503, detail="Système non initialisé")
@@ -459,7 +514,15 @@ async def analyze_skills_gap(data: SkillAnalysisRequest):
         raise HTTPException(status_code=500, detail=f"Erreur lors de l'analyse des compétences: {str(e)}")
 
 @router.get("/insights/{sector}")
+<<<<<<< HEAD
 async def get_sector_insights(sector: str, limit: int = 10):
+=======
+async def get_sector_insights(
+    sector: str,
+    limit: int = 10,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         if not career_coaching_service.index or not career_coaching_service.profile_map:
             raise HTTPException(status_code=503, detail="Système non initialisé")
@@ -480,7 +543,14 @@ async def get_sector_insights(sector: str, limit: int = 10):
         raise HTTPException(status_code=500, detail=f"Erreur lors de l'analyse du secteur: {str(e)}")
 
 @router.post("/save-session")
+<<<<<<< HEAD
 async def save_coaching_session(data: SaveSessionRequest):
+=======
+async def save_coaching_session(
+    data: SaveSessionRequest,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         session_id = career_coaching_service.save_coaching_session(
             data.user_id, data.objectif, data.competences, data.secteur, data.plan_data
@@ -490,7 +560,14 @@ async def save_coaching_session(data: SaveSessionRequest):
         raise HTTPException(status_code=500, detail=f"Erreur lors de la sauvegarde: {str(e)}")
 
 @router.get("/history/{user_id}")
+<<<<<<< HEAD
 async def get_coaching_history(user_id: int):
+=======
+async def get_coaching_history(
+    user_id: int,
+    current_user: dict = Depends(get_current_user)
+):
+>>>>>>> 5e0de77 (Auth commit)
     try:
         history = career_coaching_service.get_coaching_history(user_id)
         return {

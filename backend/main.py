@@ -18,6 +18,10 @@ from routers import salary_enhanced as salary_enhanced_router
 from routers import coaching  as coaching_router
 from routers import rag_coaching as rag_coaching_router
 from routers import supabase_career_coaching as supabase_career_coaching_router
+<<<<<<< HEAD
+=======
+from routers import auth as auth_router
+>>>>>>> 5e0de77 (Auth commit)
 
 # ── Services (instances globales) ────────────────────────────────────────
 try:
@@ -161,6 +165,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+<<<<<<< HEAD
+=======
+# Middleware d'authentification global - DÉSACTIVÉ pour utiliser les dépendances FastAPI
+# try:
+#     from middleware.auth_middleware import add_auth_middleware
+#     add_auth_middleware(app)
+# except Exception as e:
+#     log.warning(f"⚠️  Middleware d'authentification non chargé: {e}")
+#     log.warning("L'application fonctionnera sans protection globale")
+
+# Note: L'authentification est maintenant gérée par les dépendances FastAPI dans chaque router
+log.info("🔒 Authentification JWT activée via les dépendances FastAPI")
+
+>>>>>>> 5e0de77 (Auth commit)
 # Health/version
 @app.get("/api/health")
 async def health():
@@ -171,6 +189,14 @@ async def version():
     return {"name": settings.APP_NAME, "version": settings.APP_VERSION, "env": settings.ENV}
 
 # ── Mount routers (✅ préfixes corrects) ──────────────────────────────────
+<<<<<<< HEAD
+=======
+# Authentification (routes publiques - pas de protection)
+app.include_router(auth_router.router,              prefix="/api/auth",             tags=["authentication"])
+
+# Routes protégées (nécessitent une authentification)
+# Note: Toutes les autres routes sont maintenant protégées par défaut
+>>>>>>> 5e0de77 (Auth commit)
 app.include_router(documents_router.router,         prefix="/api/documents",        tags=["documents"])
 # Laisse /api pour ton doc_rag existant si tu en dépends déjà
 app.include_router(doc_rag_router.router,           prefix="/api",                  tags=["doc-rag"])

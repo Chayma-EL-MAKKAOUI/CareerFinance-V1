@@ -1,6 +1,10 @@
 'use client'
 import { useState, useRef } from 'react'
 import { Send } from 'lucide-react'
+<<<<<<< HEAD
+=======
+import ProtectedRoute from '../../components/Auth/ProtectedRoute'
+>>>>>>> 5e0de77 (Auth commit)
 
 export default function Page() {
   const [activeTab, setActiveTab] = useState('bulletin-paie')
@@ -176,6 +180,7 @@ export default function Page() {
   }
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 pt-6 pb-6 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -246,11 +251,89 @@ export default function Page() {
                 <button className="bg-gradient-to-r from-purple-500 to-cyan-400 text-white p-3 rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200">
                   <Send size={16} />
                 </button>
+=======
+    <ProtectedRoute>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 pt-6 pb-6 px-6">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-cyan-400 rounded-2xl mb-6 shadow-lg">
+              <span className="text-white font-bold text-2xl">CF</span>
+            </div>
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 bg-clip-text text-transparent mb-4">
+              CareerFinance AI
+            </h1>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Votre assistant intelligent pour optimiser votre carrière et comprendre vos finances
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-2">
+              {/* Navigation Tabs */}
+              <div className="flex space-x-2 mb-8 bg-white/70 backdrop-blur-sm p-2 rounded-2xl shadow-lg border border-white/20">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex-1 py-4 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${
+                      activeTab === tab.id
+                        ? 'bg-gradient-to-r from-purple-500 to-cyan-400 text-white shadow-xl shadow-purple-500/25'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Tab Content */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20">
+                {renderTabContent()}
+              </div>
+            </div>
+
+            {/* AI Assistant Sidebar */}
+            <div className="lg:col-span-1">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-cyan-400 rounded-full flex items-center justify-center">
+                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                  </div>
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">
+                    Assistant IA
+                  </h3>
+                </div>
+                
+                <div className="bg-gradient-to-r from-purple-50 to-cyan-50 rounded-xl p-4 mb-6 border border-purple-100">
+                  <p className="text-gray-700 text-sm font-medium mb-3">
+                    👋 Bonjour ! Je suis votre assistant personnel.
+                  </p>
+                </div>
+
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={chatMessage}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setChatMessage(e.target.value)}
+                    placeholder="Tapez votre message ici..."
+                    className="flex-1 p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm bg-white/70 backdrop-blur-sm"
+                  />
+                  <button className="bg-gradient-to-r from-purple-500 to-cyan-400 text-white p-3 rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200">
+                    <Send size={16} />
+                  </button>
+                </div>
+>>>>>>> 5e0de77 (Auth commit)
               </div>
             </div>
           </div>
         </div>
       </div>
+<<<<<<< HEAD
     </div>
+=======
+    </ProtectedRoute>
+>>>>>>> 5e0de77 (Auth commit)
   )
 }
